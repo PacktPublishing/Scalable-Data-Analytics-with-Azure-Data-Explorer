@@ -1,0 +1,5 @@
+// Queries the PopulationData table, orders the states by population in descending order and 
+// displays the results as a areachart.
+PopulationData
+| order by Population desc 
+| render areachart  
