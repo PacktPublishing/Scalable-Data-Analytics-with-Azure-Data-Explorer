@@ -2,8 +2,8 @@ $resource_group_name = 'adx-rg'
 $location = 'westeurope'
 $cluster_name = 'adxmyerscough'
 $db_name = 'adxdb'
-$hot_cache = P31D
-$retention_period = P365D
+$hot_cache = 'P31D'
+$retention_period = 'P365D'
 
 # install the az kusto module
 az extension add --name kusto
