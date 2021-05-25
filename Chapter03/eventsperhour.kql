@@ -1,0 +1,8 @@
+// Generates a time chart showing the number of events hourly per day.
+// This example was taken from https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/tutorial?pivots=azuredataexplorer#daily-average-cycle
+// the purpose is demonstrate the Azure Data Explorer UI statistics features. 
+StormEvents
+| extend hour = floor(StartTime % 1d , 1h)
+| summarize event_count=count() by hour
+| sort by hour asc
+| render timechart
