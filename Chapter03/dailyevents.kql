@@ -1,0 +1,6 @@
+// This sample query was taken from https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/tutorial?pivots=azuredataexplorer#timecharts
+// the query renders a time chart. The purpose of the query is to demonstrate features
+// of the ADX UI
+StormEvents
+| summarize event_count=count() by bin(StartTime, 1d)
+| render timechart
