@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "adx_cluster_name": {
+        "value": "adxmyerscough"
+      },
+      "adx_database_name": {
+        "value": "adx-db"
+      },
+      "adx_cluster_sku_name": {
+        "value": "Dev(No SLA)_Standard_D11_v2"
+      },
+      "adx_cluster_sku_tier": {
+        "value": "Basic"
+      },
+      "adx_cluster_sku_capacity": {
+        "value": 1
+      },
+      "adx_cluster_enableDiskEncryption": {
+        "value": true
+      },
+      "adx_cluster_enablePurge": {
+        "value": false
+      },
+      "adx_cluster_enableDoubleEncryption": {
+        "value": false
+      },
+      "adx_cluster_engineVersion": {
+        "value": "V3"
+      },
+      "adx_db_softDeletePeriod": {
+        "value": 365
+      },
+      "adx_db_hotCachePeriod": {
+        "value": 30
+      }
+    }
+  }

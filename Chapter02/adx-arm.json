@@ -1,0 +1,119 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+
+    "parameters": {
+        "adx_cluster_name": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of our ADX Cluster. This value needs to be globally unique"
+            }
+        },
+        "adx_database_name": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of our ADX Database. This value needs to be unique within the ADX cluster."
+            }
+        },
+        "adx_cluster_sku_name": {
+            "type": "string",
+            "defaultValue": "Dev(No SLA)_Standard_D11_v2",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "adx_cluster_sku_tier": {
+            "type": "string",
+            "defaultValue": "Basic",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "adx_cluster_sku_capacity": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The numbers of (VM) instances in the cluster."
+            }
+        },
+        "adx_cluster_enableDiskEncryption": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+                "description": "Indicates if disk encrytion is enabled. true = enabled, false = disabled. We enabled encryption by default."
+            }
+        },
+        "adx_cluster_enablePurge": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Indicates if purging is enabled. true = enabled, false = disabled."
+            }
+        },
+        "adx_cluster_enableDoubleEncryption": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Indicates if double disk encryption is enabled. true = enabled, false = disabled."
+            }
+        },
+        "adx_cluster_engineVersion": {
+            "type": "string",
+            "allowedValues": ["V3"],
+            "defaultValue": "V3",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "adx_db_softDeletePeriod": {
+            "type": "int",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "adx_db_hotCachePeriod": {
+            "type": "int",
+            "metadata": {
+                "description": ""
+            }
+        }
+    },
+
+    "variables": {
+        "adx_cluster_resourceId": "[resourceId('Microsoft.Kusto/clusters', parameters('adx_cluster_name'))]",
+        "adx_db_name": "[concat(parameters('adx_cluster_name'), '/', parameters('adx_database_name'))]"
+    },
+
+    "resources": [
+        {
+            "type": "Microsoft.Kusto/clusters",
+            "apiVersion": "2020-06-14",
+            "name": "[parameters('adx_cluster_name')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "[parameters('adx_cluster_sku_name')]",
+                "tier": "[parameters('adx_cluster_sku_tier')]",
+                "capacity": "[parameters('adx_cluster_sku_capacity')]"
+            },
+            "properties": {
+                "enableDiskEncryption": "[parameters('adx_cluster_enableDiskEncryption')]",
+                "enableDoubleEncryption": "[parameters('adx_cluster_enableDoubleEncryption')]",
+                "enablePurge": "[parameters('adx_cluster_enablePurge')]",
+                "engineType": "[parameters('adx_cluster_engineVersion')]"
+            }
+        },
+        {
+            "type": "Microsoft.Kusto/clusters/databases",
+            "apiVersion": "2020-06-14",
+            "name": "[variables('adx_db_name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('adx_cluster_resourceId')]"
+            ],
+            "properties": {
+                "softDeletePeriodInDays": "[parameters('adx_db_softDeletePeriod')]",
+                "hotCachePeriodInDays": "[parameters('adx_db_hotCachePeriod')]"
+            }
+        }
+    ]
+  }
