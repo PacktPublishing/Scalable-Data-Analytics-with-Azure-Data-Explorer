@@ -19,14 +19,14 @@
             "type": "string",
             "defaultValue": "Dev(No SLA)_Standard_D11_v2",
             "metadata": {
-                "description": ""
+                "description": "Name of the Cluster SKU. Use Get-AzKustoClusterSku  to get a list of available SKUs"
             }
         },
         "adx_cluster_sku_tier": {
             "type": "string",
             "defaultValue": "Basic",
             "metadata": {
-                "description": ""
+                "description": "The Cluster's SKU tier. Standard or Basic."
             }
         },
         "adx_cluster_sku_capacity": {
@@ -62,19 +62,19 @@
             "allowedValues": ["V3"],
             "defaultValue": "V3",
             "metadata": {
-                "description": ""
+                "description": "The Cluster Engine version."
             }
         },
         "adx_db_softDeletePeriod": {
             "type": "int",
             "metadata": {
-                "description": ""
+                "description": "The retention period before the data is removed from the cluster"
             }
         },
         "adx_db_hotCachePeriod": {
             "type": "int",
             "metadata": {
-                "description": ""
+                "description": "The duration the data remains in the hot cache (the local SSD storage)"
             }
         }
     },
