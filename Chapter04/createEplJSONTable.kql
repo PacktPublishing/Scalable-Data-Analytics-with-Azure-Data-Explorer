@@ -1,0 +1,22 @@
+
+
+// Creates a new table called EnglishPremierLeagueJSON
+.create table EnglishPremierLeagueJSON (
+    Date: string,
+    HomeTeam: string,
+    AwayTeam: string,
+    FulltimeHomeGoals: int,
+    FulltimeAwayGoals: int,
+    FulltimeResult: string
+)
+
+// Creates a new JSON mapping that maps the JSON values to our table's columns
+.create table ['EnglishPremierLeagueJSON'] ingestion json mapping 'ELP_Custom_JSON_Mapping'
+'['
+      '{"column": "Date", "Properties": {"Path": "$.Date"}},'
+      '{"column": "HomeTeam", "Properties": {"Path": "$.HomeTeam"}},'
+      '{"column": "AwayTeam", "Properties": {"Path": "$.AwayTeam"}},'
+      '{"column": "FulltimeHomeGoals", "Properties": {"Path": "$.FTHG"}},'
+      '{"column": "FulltimeAwayGoals", "Properties": {"Path": "$.FTAG"}},'
+      '{"column": "FulltimeResult", "Properties": {"Path": "$.FTR"}},'
+']'

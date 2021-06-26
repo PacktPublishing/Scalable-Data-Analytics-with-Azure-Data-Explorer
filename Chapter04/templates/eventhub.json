@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "event_hub_namespace": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of our Event Hub Namespace"
+        }
+      },
+      "event_hub_name": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of our Event Hub"
+        }
+      },
+      "event_hub_sku": {
+        "type": "string",
+        "defaultValue": "Standard",
+        "allowedValues": [
+            "Basic",
+            "Standard",
+            "Premium"
+        ],
+        "metadata": {
+          "description": "Specifies the messaging tier for Event Hub Namespace."
+        }
+      }
+    },
+    "variables": {
+      "event_hub_namespaceId": "[resourceId('Microsoft.EventHub/namespaces', parameters('event_hub_namespace'))]"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.EventHub/namespaces",
+        "apiVersion": "2021-01-01-preview",
+        "name": "[parameters('event_hub_namespace')]",
+        "location": "[resourceGroup().location]",
+        "sku": {
+          "name": "[parameters('event_hub_sku')]",
+          "tier": "[parameters('event_hub_sku')]",
+          "capacity": 1
+        },
+        "properties": {
+          "isAutoInflateEnabled": false
+        }
+      },
+      {
+        "type": "Microsoft.EventHub/namespaces/eventhubs",
+        "apiVersion": "2017-04-01",
+        "name": "[concat(parameters('event_hub_namespace'), '/', parameters('event_hub_name'))]",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+          "[variables('event_hub_namespaceId')]"
+        ],
+        "properties": {
+          "messageRetentionInDays": 7,
+          "partitionCount": 1
+        }
+      }
+    ]
+  }

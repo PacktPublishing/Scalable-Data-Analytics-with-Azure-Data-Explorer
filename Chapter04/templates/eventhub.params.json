@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "event_hub_namespace": {
+        "value": "adxeventhubnamespace"
+      },
+      "event_hub_name": {
+        "value": "adxeventhub"
+      }
+    }
+  }
