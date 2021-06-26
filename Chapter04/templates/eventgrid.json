@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+
+    "parameters": {
+      "eventHubNamespace": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of the EventHub Namespace"
+        }
+      },
+      "eventHubName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of our EventHub"
+        }
+      },
+      "systemTopicName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of our system topic"
+        }
+      },
+      "storageAccountName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of our storage account"
+        }
+      },
+      "eventGridSubscriptionName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of our Event Grid Subcription"
+        }
+      }
+    },
+
+    "variables": {
+      "eventHubResourceId": "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespace'), parameters('eventHubName'))]"
+    },
+
+    "resources": [
+        {
+            "type": "Microsoft.EventGrid/systemTopics",
+            "apiVersion": "2020-04-01-preview",
+            "name": "[parameters('systemTopicName')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+              "source": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+              "topicType": "Microsoft.Storage.StorageAccounts"
+            }
+          },
+          {
+            "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions",
+            "apiVersion": "2020-04-01-preview",
+            "name": "[concat(parameters('systemTopicName'), '/', parameters('eventGridSubscriptionName'))]",
+            "dependsOn": [
+              "[resourceId('Microsoft.EventGrid/systemTopics', parameters('systemTopicName'))]"
+            ],
+            "properties": {
+              "destination": {
+                "properties": {
+                  "resourceId": "[variables('eventHubResourceId')]"
+                },
+                "endpointType": "EventHub"
+              },
+              "filter": {
+                "includedEventTypes": [
+                    "Microsoft.Storage.BlobCreated"
+                ]
+              }
+            }
+        }
+    ],
+    "outputs": {
+      "ADXresourceId": {
+        "type": "string",
+        "value": "[variables('eventHubResourceId')]"
+      }
+    }
+  }
