@@ -11,3 +11,9 @@
       '{"column": "Name", "Properties": {"Ordinal": "0"}},'
       '{"column": "Gender", "Properties": {"Ordinal": "1"}},'
 ']'
+
+// find all the males that have a D in there name.
+// This search is not case sensitive.
+Family
+| where Gender == "Male"
+| where Name contains "D"
