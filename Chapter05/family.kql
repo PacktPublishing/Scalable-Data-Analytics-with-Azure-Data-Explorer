@@ -1,0 +1,13 @@
+
+// Create the family table consisting of the name and gender columns
+.create table Family (
+    Name: string,
+    Gender: string
+)
+
+// create the CSV schema mapping
+.create table ['Family'] ingestion csv mapping 'Family_Mapping'
+'['
+      '{"column": "Name", "Properties": {"Ordinal": "0"}},'
+      '{"column": "Gender", "Properties": {"Ordinal": "1"}},'
+']'
