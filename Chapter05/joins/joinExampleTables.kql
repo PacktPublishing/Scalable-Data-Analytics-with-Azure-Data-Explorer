@@ -1,0 +1,26 @@
+
+// Create the FamilySport table that will track their favorite sports.
+.create table FamilySport (
+    Name: string,
+    FavoriteSport: string
+)
+
+// create the CSV schema mapping
+.create table ['FamilySport'] ingestion csv mapping 'FamilySport_Mapping'
+'['
+      '{"column": "Name", "Properties": {"Ordinal": "0"}},'
+      '{"column": "FavoriteSport", "Properties": {"Ordinal": "1"}},'
+']'
+
+// Create the FamilyFood table that will track their favorite foods.
+.create table FamilyFood (
+    Name: string,
+    FavoriteFood: string
+)
+
+// create the CSV schema mapping
+.create table ['FamilyFood'] ingestion csv mapping 'FamilyFood_Mapping'
+'['
+      '{"column": "Name", "Properties": {"Ordinal": "0"}},'
+      '{"column": "FavoriteFood", "Properties": {"Ordinal": "1"}},'
+']'
