@@ -1,0 +1,9 @@
+// plots the best fit line.
+demo_series3
+| extend (RSquare,Slope,Variance,RVariance,Interception,LineFit)=series_fit_line(num)
+| render timechart
+
+// returns the linear regression stats as a table
+demo_series3
+| extend (RSquare,Slope,Variance,RVariance,Interception,LineFit)=series_fit_line(num)
+| project RSquare,Slope,Variance,RVariance,Interception,LineFit

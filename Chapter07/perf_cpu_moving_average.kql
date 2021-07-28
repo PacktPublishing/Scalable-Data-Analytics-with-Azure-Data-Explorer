@@ -1,0 +1,18 @@
+// The following query renders the average CPU processor time for a day.
+// The query is  for Log Analytic's Perf table and a couple of extra steps 
+// are required to render the time chart.
+// Log Analytics requires the moving average series to tbe expanded (mv-expand) before it
+// can be rendered. 
+let startTime = ago(1d);
+let endTime = now();
+let binSize = 10m;
+let coefficient_windowsize=5;
+Perf
+| where TimeGenerated >= startTime
+| where CounterName == "% Processor Time" and Computer == "CH1-UBNTVM"
+| make-series cpu=avg(CounterValue) default=0 on TimeGenerated in range (startTime, endTime, binSize) by Computer
+| extend movingAverage=series_fir(cpu, repeat(1, coefficient_windowsize))
+| mv-expand cpu to typeof(double), movingAverage to typeof(double), TimeGenerated to typeof(datetime)
+| project TimeGenerated, cpu, movingAverage
+| render timechart 
+

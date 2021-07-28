@@ -1,0 +1,2 @@
+print repeat(5, 3)
+

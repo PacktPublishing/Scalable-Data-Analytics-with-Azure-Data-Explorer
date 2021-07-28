@@ -1,0 +1,7 @@
+// the following helper function calculates the moving average for a time series
+// the original code was taken from: https://docs.microsoft.com/en-us/azure/data-explorer/kusto/functions-library/series-moving-avg-fl?tabs=adhoc
+// you need to install the function into your Log Analytics workspace by saving the query as a function.
+let series_moving_avg_fl = (y_series:dynamic, n:int, center:bool=false)
+{
+    series_fir(y_series, repeat(1, n), true, center)
+}

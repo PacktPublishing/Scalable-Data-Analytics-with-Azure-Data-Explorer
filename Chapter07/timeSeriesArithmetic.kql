@@ -1,0 +1,14 @@
+let startTime = ago(1d);
+let endTime = now();
+let binSize = 10m;
+let coefficient_windowsize=10;
+Perf
+| where TimeGenerated >= startTime
+| where CounterName == "% Processor Time" and Computer == "CH1-UBNTVM"
+| make-series cpu=avg(CounterValue) default=0 on TimeGenerated in range (startTime, endTime, binSize) by Computer
+| extend movingAverage=series_fir(cpu, repeat(1, coefficient_windowsize))
+| extend add_diff = series_add(cpu, movingAverage)
+| extend sub_diff = series_subtract(cpu, movingAverage)
+| mv-expand cpu to typeof(double), movingAverage to typeof(double), add_diff to typeof(double), sub_diff to typeof(double), TimeGenerated to typeof(datetime)
+| project TimeGenerated, cpu, movingAverage, add_diff, sub_diff
+| render timechart
