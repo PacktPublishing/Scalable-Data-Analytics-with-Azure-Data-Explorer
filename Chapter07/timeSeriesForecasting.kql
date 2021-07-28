@@ -1,0 +1,9 @@
+let startTime = toscalar(demo_make_series1 | summarize min(TimeStamp));
+let endTime = toscalar(demo_make_series1 | summarize max(TimeStamp));
+let binSize = 1h;
+let forecastSize = 7d;
+demo_make_series1
+| where Country == "United States"
+| make-series requests=count() default=0 on TimeStamp in range (startTime, endTime + forecastSize, binSize) by Country
+| extend forecastedRequests = series_decompose_forecast(requests, toint(forecastSize / binSize))
+| render timechart

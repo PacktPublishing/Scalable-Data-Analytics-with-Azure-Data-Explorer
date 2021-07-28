@@ -11,8 +11,8 @@ Perf
 | where TimeGenerated >= startTime
 | where CounterName == "% Processor Time" and Computer == "CH1-UBNTVM"
 | make-series cpu=avg(CounterValue) default=0 on TimeGenerated in range (startTime, endTime, binSize) by Computer
-| extend movingAverage=series_fir(cpu, repeat(1, coefficient_windowsize)), movingAverage_centered=series_fir(cpu, repeat(1, coefficient_windowsize), true, true)  
-// the mv-expand operations are required to render the moving average. 
-| mv-expand cpu to typeof(double), movingAverage to typeof(double), movingAverage_centered to typeof(double), TimeGenerated to typeof(datetime)
-| project TimeGenerated, cpu, movingAverage, movingAverage_centered
+| extend movingAverage=series_fir(cpu, repeat(1, coefficient_windowsize))
+| mv-expand cpu to typeof(double), movingAverage to typeof(double), TimeGenerated to typeof(datetime)
+| project TimeGenerated, cpu, movingAverage
 | render timechart 
+
