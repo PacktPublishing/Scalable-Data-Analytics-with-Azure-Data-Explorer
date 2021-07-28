@@ -1,0 +1,11 @@
+// calculates a time series for the number of security patches installed over the 
+// and displays the time series stats.
+let startTime = ago(100d);
+let endTime = now();
+let binSize = 7d;
+Update
+| where TimeGenerated  between (startTime .. endTime)
+| where Classification == "Security Updates"
+| make-series updates=count() default=0 on TimeGenerated in range (startTime, endTime, binSize) by UpdateState
+| project UpdateState, series_stats(updates)
+

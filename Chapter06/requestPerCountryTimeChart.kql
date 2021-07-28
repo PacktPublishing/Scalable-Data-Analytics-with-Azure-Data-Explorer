@@ -1,0 +1,7 @@
+let startTime = toscalar(demo_make_series1 | summarize min(TimeStamp));
+let endTime = toscalar(demo_make_series1 | summarize max(TimeStamp));
+let binSize = 1d;
+demo_make_series1
+| where TimeStamp between (startTime .. endTime)
+| make-series requests=count() default=0 on TimeStamp in range (startTime, endTime, binSize) by Country
+| render timechart

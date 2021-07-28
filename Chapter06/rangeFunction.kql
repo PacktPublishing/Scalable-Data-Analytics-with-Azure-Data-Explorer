@@ -1,0 +1,9 @@
+// generates a list of numbers from 1 to 20 in increments of 2
+range MyNumbers from 1 to 20 step 2
+
+// generates an array of integers in the 
+// range of 1 to 20 in increments of 2
+print range(1, 20, 2)
+
+// using range with dates
+print range(ago(10d), now(), 2d)

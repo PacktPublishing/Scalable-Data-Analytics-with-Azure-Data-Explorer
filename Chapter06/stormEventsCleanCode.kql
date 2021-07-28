@@ -1,0 +1,8 @@
+let startTime = datetime("2007-01-01");
+let endTime = datetime("2007-10-01");
+let binSize = 1d;
+let nameOfState = "NEW YORK";
+StormEvents
+| where StartTime >= ago(startTime)
+| where State == nameOfState
+| make-series events=count() default=0 on StartTime in range (startTime, endTime, binSize) by EventType
