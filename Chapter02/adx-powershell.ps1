@@ -16,7 +16,7 @@ Get-AzLocation | Select-Object Location
 New-AzResourceGroup -Name $resource_group_name -Location $location
 
 # Check cluster name availability
-Test-AzKustoClusterNameAvailability -Location $location -Name $cluster_name -Type 'Microsoft.Kusto/clusters'
+Test-AzKustoClusterNameAvailability -Location $location -Name $cluster_name
 
 # Get Cluster SKUs
 Get-AzKustoClusterSku
