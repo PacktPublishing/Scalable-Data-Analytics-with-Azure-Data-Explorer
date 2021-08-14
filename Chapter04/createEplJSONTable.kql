@@ -11,7 +11,7 @@
 )
 
 // Creates a new JSON mapping that maps the JSON values to our table's columns
-.create table ['EnglishPremierLeagueJSON'] ingestion json mapping 'ELP_Custom_JSON_Mapping'
+.create table ['EnglishPremierLeagueJSON'] ingestion json mapping 'EPL_Custom_JSON_Mapping'
 '['
       '{"column": "Date", "Properties": {"Path": "$.Date"}},'
       '{"column": "HomeTeam", "Properties": {"Path": "$.HomeTeam"}},'
