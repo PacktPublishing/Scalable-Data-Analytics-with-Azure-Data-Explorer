@@ -167,7 +167,7 @@
     AwayTeamBookingPoints: int 
 )
 
-.create table ['EnglishPremierLeague'] ingestion csv mapping 'ELP_Custom_Mapping'
+.create table ['EnglishPremierLeague'] ingestion csv mapping 'EPL_Custom_Mapping'
 '['
       '{"column": "Divison", "Properties": {"Ordinal": "0"}},'
       '{"column": "Date", "Properties": {"Ordinal": "1"}},'
