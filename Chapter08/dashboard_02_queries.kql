@@ -1,0 +1,4 @@
+// the following query returns a list of all the states, which we will
+// use for our list of options for the parameter we create.
+StormEvents
+| distinct State
