@@ -1,0 +1,28 @@
+// the following query returns the sum of indirect injuries for california.
+StormEvents
+| where State == "CALIFORNIA"
+| summarize DirectInjuries=sum(InjuriesDirect)
+| render card with (xtitle="Number of injuries caused directly by storms")
+
+// the following query returns the sum of indirect deaths for california.
+StormEvents
+| where State == "CALIFORNIA"
+| summarize DirectInjuries=sum(DeathsDirect)
+
+// returns the total cost of damage for California
+StormEvents
+| where State == "CALIFORNIA"
+| summarize TotalDamage=sum(DamageProperty)
+
+// returns an aggregation for the number of events for California
+StormEvents
+| where State == "CALIFORNIA"
+| summarize _count=count() by EventType
+| order by _count desc 
+
+// returns the columns necessary for rendering the storm events on a map
+StormEvents
+| where State == "CALIFORNIA"
+| where isnotempty( BeginLat) and isnotempty( BeginLon)
+| project EventType, BeginLon, BeginLat, 1
+
