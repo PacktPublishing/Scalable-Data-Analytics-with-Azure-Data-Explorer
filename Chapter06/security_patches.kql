@@ -1,0 +1,9 @@
+// Generates a time series for the number of security updates installed in the last 100 days.
+let startTime = ago(100d);
+let endTime = now();
+let binSize = 7d;
+Update
+| where TimeGenerated between (startTime .. endTime)
+| where Classification  == "Security Updates"
+| make-series security_updates=count() default=0 on TimeGenerated in range (startTime, endTime, binSize) by UpdateState
+| render timechart 
