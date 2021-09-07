@@ -1,0 +1,2 @@
+FailedIngestion
+| project TimeGenerated, OperationName, Category, ResultType, Database, Table, ErrorCode, Details, IngestionSourcePath
