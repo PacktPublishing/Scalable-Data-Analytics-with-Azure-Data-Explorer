@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "publicIpName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the public IP address"
+      }
+    },
+    "publicIpAllocationMethod": {
+        "type": "string",
+        "defaultValue": "static",
+        "metadata": {
+          "description": "Public IP allocation method. By default this is static."
+        }
+      },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2020-05-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('publicIpName')]",
+      "sku": {
+        "name": "Standard"
+      },
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIPAllocationMethod": "[parameters('publicIpAllocationMethod')]",
+        "publicIPAddressVersion": "IPv4"
+      }
+    }
+  ]
+}
