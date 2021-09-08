@@ -9,5 +9,6 @@
 $resourceGroupName = "adx-rg"
 New-AzResourceGroup -Name $resourceGroupName -Location "westeurope" -Force
 
-# Deploy our ARM templates to the resource group we just created.
+# Deploy our public IP resources.
+New-AzResourceGroupDeployment -Name "AdxChapter10Deployment" -ResourceGroupName $resourceGroupName -TemplateFile ./templates/publicIp.json -TemplateParameterFile ./parameters/enginePublicIp.params.json
 New-AzResourceGroupDeployment -Name "AdxChapter10Deployment" -ResourceGroupName $resourceGroupName -TemplateFile ./templates/publicIp.json -TemplateParameterFile ./parameters/dmPublicIp.params.json
