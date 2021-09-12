@@ -12,9 +12,9 @@ New-AzResourceGroup -Name $resourceGroupName -Location $location -Force
 
 Write-Information "Starting resource deployment..."
 
-# Deploy the route table and NSG
-New-AzResourceGroupDeployment -Name "AdxChapter10RouteTableDeployment" -ResourceGroupName $resourceGroupName -TemplateFile ./templates/routeTable.json -TemplateParameterFile ./parameters/routeTable.params.json
+# Deploy the NSG and route table
 New-AzResourceGroupDeployment -Name "AdxChapter10NSGDeployment" -ResourceGroupName $resourceGroupName -TemplateFile ./templates/nsg.json -TemplateParameterFile ./parameters/nsg.params.json
+New-AzResourceGroupDeployment -Name "AdxChapter10RouteTableDeployment" -ResourceGroupName $resourceGroupName -TemplateFile ./templates/routeTable.json -TemplateParameterFile ./parameters/routeTable.params.json
 
 #Deploy the virtual Network
 New-AzResourceGroupDeployment -Name "AdxChapter10VNETDeployment" -ResourceGroupName $resourceGroupName -TemplateFile ./templates/vnet.json -TemplateParameterFile ./parameters/vnet.params.json
