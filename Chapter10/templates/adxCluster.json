@@ -1,0 +1,97 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "clusterName": {
+            "type": "string"
+        },
+        "dataIngestionPublicIpName": {
+            "type": "string",
+            "defaultValue": "dataIngestion-pip"
+        },
+        "enginePublicIpName": {
+            "type": "string",
+            "defaultValue": "engine-pip"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "skuName": {
+            "type": "string",
+            "defaultValue": "Dev(No SLA)_Standard_D11_v2"
+        },
+        "skuTier": {
+            "type": "string",
+            "defaultValue": "Basic"
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "adxSubnet"
+        },
+        "virtualNetworkName": {
+            "type": "string",
+            "defaultValue": "adxVnet"
+        },
+        "nsgName": {
+            "type": "string",
+            "defaultValue": "adxNsg"
+        },
+        "routeTableName": {
+            "type": "string",
+            "defaultValue": "adxRouteTable"
+        }
+    },
+
+    "variables": {
+        "dataIngestionPublicIpId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('dataIngestionPublicIpName'))]",
+        "enginePublicIpId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('enginePublicIpName'))]",
+        "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets',parameters('virtualNetworkName'),parameters('subnetName'))]",
+        "vnetId": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+        "uniqueClusterName": "[concat(parameters('clusterName'), uniqueString(resourceGroup().id))]",
+        "adx_cluster_resourceId": "[resourceId('Microsoft.Kusto/clusters', parameters('clusterName'))]",
+        "adx_db_name": "[concat(parameters('clusterName'), '/', 'adx-db')]",
+        "adx_db_softDeletePeriod": 365,
+        "adx_db_hotCachePeriod": 30
+    },
+
+    "resources": [
+        {
+            "type": "Microsoft.Kusto/Clusters",
+            "apiVersion": "2020-06-14",
+            "name": "[parameters('clusterName')]",
+
+            "sku": {
+                "name": "[parameters('skuName')]",
+                "tier": "[parameters('skuTier')]"
+            },
+
+            "location": "[parameters('location')]",
+
+            "properties": {
+                "virtualNetworkConfiguration": {
+                    "subnetId": "[variables('subnetId')]",
+                    "enginePublicIpId": "[variables('enginePublicIpId')]",
+                    "dataManagementPublicIpId": "[variables('dataIngestionPublicIpId')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Kusto/clusters/databases",
+            "apiVersion": "2020-06-14",
+            "name": "[variables('adx_db_name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('adx_cluster_resourceId')]"
+            ],
+            
+            "properties": {
+                "softDeletePeriodInDays": "[variables('adx_db_softDeletePeriod')]",
+                "hotCachePeriodInDays": "[variables('adx_db_hotCachePeriod')]"
+            }
+        }
+    ]
+  }
