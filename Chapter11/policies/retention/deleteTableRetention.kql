@@ -1,0 +1,3 @@
+// The following query removes the retention policy
+// from the EnglishPremierLeague table.
+.delete table EnglishPremierLeague policy retention
