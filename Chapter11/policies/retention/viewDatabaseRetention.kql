@@ -1,0 +1,3 @@
+// The following query returns the current retention
+// policy for the adx-db database.
+.show database ['adx-db'] policy retention

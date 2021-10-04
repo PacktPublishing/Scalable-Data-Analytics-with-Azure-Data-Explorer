@@ -1,0 +1,3 @@
+// the following KQL management query displays the current 
+// cache policy for the EnglishPremierLeague table.
+.show table EnglishPremierLeague policy caching

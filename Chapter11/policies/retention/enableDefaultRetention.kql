@@ -1,0 +1,3 @@
+// The following query enables the default retention
+// policy on the EnglishPremierLeague table.
+.alter table EnglishPremierLeague policy retention "{}"

@@ -1,0 +1,27 @@
+// The following query creates a workload group called 
+// Packt Demo that restricts the max number of concurrent 
+// connections to 5 and restrict the number of requests per
+// hour to 1.
+.create-or-alter workload_group ['Packt Demo'] ```
+{
+  "RequestRateLimitPolicies": [
+    {
+        "IsEnabled": true,
+        "Scope": "Principal",
+        "LimitKind": "ConcurrentRequests",
+        "Properties": {
+            "MaxConcurrentRequests": 5
+        }
+    },
+    {
+        "IsEnabled": true,
+        "Scope": "Principal",
+        "LimitKind": "ResourceUtilization",
+        "Properties": {
+            "ResourceKind": "RequestCount",
+            "MaxUtilization": 1,
+            "TimeWindow": "01:00:00"
+        }
+    }
+  ]
+}```

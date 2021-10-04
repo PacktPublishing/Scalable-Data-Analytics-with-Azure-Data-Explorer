@@ -1,0 +1,4 @@
+// The following query creates a new request classification policy.
+// The group name is the in the format of <group name>;<tenant Id>
+.alter cluster policy request_classification '{"IsEnabled":true}' <|
+    iff(current_principal_is_member_of('aadgroup=TrialUsers;27447925-1f0e-41b6-b01f-973eaab478b0'), "Packt Demo","default")

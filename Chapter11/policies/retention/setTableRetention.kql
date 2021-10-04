@@ -1,0 +1,4 @@
+// The following query sets a retention policy of 90 days
+// and disabled Recoverability.
+.alter table EnglishPremierLeague policy retention 
+    "{\"SoftDeletePeriod\": \"90.00:00:00\", \"Recoverability\": \"Disabled\"}"

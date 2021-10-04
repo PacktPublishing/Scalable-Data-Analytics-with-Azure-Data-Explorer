@@ -1,0 +1,3 @@
+// The following query creates a cache policy on the 
+// EnglishPremierLeague table and sets the cache window to 5 days.
+.alter table EnglishPremierLeague policy caching hot = 5d
