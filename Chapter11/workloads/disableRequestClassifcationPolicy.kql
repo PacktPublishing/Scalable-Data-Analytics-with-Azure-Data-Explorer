@@ -1,0 +1,3 @@
+// the following query disables the request classification policy
+.alter cluster policy request_classification '{"IsEnabled":false}' <|
+    iff(current_principal_is_member_of('aadgroup=TrialUsers;27447925-1f0e-41b6-b01f-973eaab478b0'), "Packt Demo","default")
