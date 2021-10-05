@@ -1,0 +1,4 @@
+// The following query returns the list of queries and commands
+// that have been assigned the the Packt Demo workload group.
+.show commands-and-queries 
+| where WorkloadGroup == "Packt Demo"
