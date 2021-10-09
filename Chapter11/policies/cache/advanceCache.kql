@@ -1,0 +1,5 @@
+// The following query sets the cache window to 30 days and
+// loads data from June 2021 into the cache.
+.alter table EnglishPremierLeague policy caching 
+    hot = 30d,
+    hot_window = datetime(2021-06-01) .. datetime(2021-06-30)
