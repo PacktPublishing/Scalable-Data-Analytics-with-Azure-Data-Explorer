@@ -1,0 +1,2 @@
+EnglishPremierLeague
+| where HomeTeam contains "Man United" or AwayTeam contains "Man United"
