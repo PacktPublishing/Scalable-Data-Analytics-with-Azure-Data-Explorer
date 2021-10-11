@@ -1,0 +1,31 @@
+print 550 + 5
+
+StormEvents
+| where DamageProperty >= 500 * 10
+| project State, EventType, DamageProperty
+
+
+// returns false
+print 5 + 5 == 10 and 1 + 1 == 3
+
+
+// returns true - 2 is less than 5
+print 2 < 5
+
+// returns false, 5 is not less than 2
+print 5 < 2
+
+// returns true, 55 is greater than 5
+print 55 > 5
+
+// returns true, 555 is equal to 555
+print 555 == 555
+
+// returns false, 555 is equal to 555
+print 555 != 555
+
+// returns true, 10 is in the sequence of numbers.
+print 10 in (100, 50, 60, 70, 80, 10)
+
+// returns true, 20 is no in the sequence of numbers.
+print 20 !in (10, 30, 40, 50, 60, 70, 80)

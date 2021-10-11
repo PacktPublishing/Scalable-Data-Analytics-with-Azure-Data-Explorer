@@ -1,0 +1,9 @@
+.show cluster
+
+.show diagnostics
+
+.show operations
+
+.show databases details
+
+.show table StormEvents

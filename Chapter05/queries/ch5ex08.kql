@@ -1,0 +1,13 @@
+StormEvents
+| summarize count() by EventType
+
+
+StormEvents  
+| summarize total_events=count() by EventType
+| sort by total_events desc 
+| render piechart 
+
+StormEvents  
+| summarize total_events=count() by EventType
+| sort by total_events desc 
+| render stackedareachart 

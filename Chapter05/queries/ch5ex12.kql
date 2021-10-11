@@ -1,0 +1,19 @@
+FamilySport
+| join (FamilyFood) on Name
+
+FamilySport
+| join (FamilyFood) on $left.Name == $right.Name
+
+FamilySport
+| join kind=inner (FamilyFood) on Name
+
+FamilySport
+| join kind=rightouter (FamilyFood) on Name
+
+FamilySport
+| join kind=rightanti (FamilyFood) on Name
+
+FamilySport
+| join kind=leftsemi (FamilyFood) on Name
+
+

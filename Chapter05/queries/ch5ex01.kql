@@ -1,0 +1,4 @@
+let stateToSearch = 'FLORIDA';
+StormEvents
+| where State == stateToSearch
+| project State, EventType

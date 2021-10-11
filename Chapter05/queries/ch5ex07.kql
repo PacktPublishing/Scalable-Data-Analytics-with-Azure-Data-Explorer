@@ -1,0 +1,7 @@
+StormEvents
+| limit 10
+
+StormEvents
+| project StartTime, State, EventType, EndTime
+| limit 10
+

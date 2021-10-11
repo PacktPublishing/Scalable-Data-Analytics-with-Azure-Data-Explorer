@@ -1,0 +1,4 @@
+SecurityDetection
+| where TimeGenerated >= ago(5d)
+| summarize count() by AlertSeverity, AlertTitle
+

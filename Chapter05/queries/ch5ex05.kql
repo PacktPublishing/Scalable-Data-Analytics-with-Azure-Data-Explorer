@@ -1,0 +1,19 @@
+StormEvents
+| where DamageProperty > 0
+
+StormEvents
+| where State == 'INDIANA' and DamageProperty > 0
+
+StormEvents
+| count
+
+StormEvents
+| summarize count() by EventType
+
+StormEvents
+| summarize total_events=count() by State, EventType
+
+StormEvents
+| where EventType == "Flash Flood"
+| summarize total_incidents=count() by State, EventType
+| sort by total_incidents desc 

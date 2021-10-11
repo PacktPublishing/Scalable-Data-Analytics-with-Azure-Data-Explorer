@@ -1,0 +1,5 @@
+select EventType from StormEvents where State like 'CALIFORNIA'
+
+EXPLAIN
+select EventType from StormEvents where State like 'CALIFORNIA'
+

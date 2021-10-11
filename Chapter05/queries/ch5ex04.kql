@@ -1,0 +1,16 @@
+StormEvents
+| search "thunder"
+
+
+search "Thunderstorm" 
+
+StormEvents
+| search "thunderstorm"
+
+search in (StormEvents, PopulationData) "thunderstorm"
+
+search EventType:"thunderstorm wind"
+
+StormEvents
+| search DamageProperty > 0
+
