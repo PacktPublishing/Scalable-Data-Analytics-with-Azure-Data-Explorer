@@ -1,0 +1,8 @@
+.show queries 
+| sort by Duration desc 
+| limit 10
+| project Text, Duration
+
+
+.show queries 
+| summarize count() by WorkloadGroup
