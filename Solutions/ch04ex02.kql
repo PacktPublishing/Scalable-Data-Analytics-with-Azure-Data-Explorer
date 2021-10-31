@@ -1,0 +1,14 @@
+.alter table ['EnglishPremierLeagueJSON'] (Date: string, HomeTeam: string, AwayTeam: string, FulltimeHomeGoals: int, FulltimeAwayGoals: int,
+    FulltimeResult: int, Referee: string)
+
+
+.alter table ['EnglishPremierLeagueJSON'] ingestion json mapping 'EPL_Custom_JSON_Mapping'
+'['
+    '{"Column": "Date", "Properties": {"Path": "$.Date"}},'
+    '{"Column": "HomeTeam", "Properties": {"Path": "$.HomeTeam"}},'
+    '{"Column": "AwayTeam", "Properties": {"Path": "$.AwayTeam"}},'
+    '{"Column": "FulltimeHomeGoals", "Properties": {"Path": "$.FTHG"}},'
+    '{"Column": "FulltimeAwayGoals", "Properties": {"Path": "$.FTAG"}},'
+    '{"Column": "FulltimeResult", "Properties": {"Path": "$.FTR"}},'
+    '{"Column": "Referee", "Properties": {"Path": "$.Referee"}}'
+']'

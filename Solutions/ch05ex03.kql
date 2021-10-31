@@ -1,0 +1,2 @@
+StormEvents | where State =~ "California"
+ | summarize event=count() by EventType | render columnchart

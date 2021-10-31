@@ -1,0 +1,10 @@
+// returns the number of home goals scored
+EnglishPremierLeague
+| summarize home_goals=sum(FTHG) by HomeTeam
+
+// counts the number of wins 
+EnglishPremierLeague
+| extend winner = iif(FTR contains "A", AwayTeam, iif(FTR contains "H", HomeTeam, "DRAW")) 
+| project HomeTeam, AwayTeam, winner
+| summarize wins=count() by winner
+| sort by wins
