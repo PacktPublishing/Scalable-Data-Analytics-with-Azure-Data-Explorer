@@ -30,10 +30,10 @@
         "value": "V3"
       },
       "adx_db_softDeletePeriod": {
-        "value": 365
+        "value": 100
       },
       "adx_db_hotCachePeriod": {
-        "value": 30
+        "value": 10
       }
     }
   }

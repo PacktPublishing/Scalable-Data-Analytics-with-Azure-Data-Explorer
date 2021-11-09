@@ -1,0 +1,3 @@
+StormEvents  
+| where State == "CALIFORNIA"
+| project EventType, InjuriesDirect, DeathsDirect, DamageProperty, BeginLat, BeginLon
