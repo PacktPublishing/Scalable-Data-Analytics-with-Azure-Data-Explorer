@@ -2,3 +2,16 @@
 // that have been assigned the the Packt Demo workload group.
 .show commands-and-queries 
 | where WorkloadGroup == "Packt Demo"
+
+
+.show queries 
+| project Text, Database, StartedOn, Duration, State, FailureReason, TotalCpu, CacheStatistics.Disk.Misses, WorkloadGroup, User, Principal
+| sort by Duration desc
+
+
+.show queries 
+| summarize count() by State
+
+.show commands 
+| project Text, StartedOn, Duration, User, TotalCpu, WorkloadGroup
+| take 10
