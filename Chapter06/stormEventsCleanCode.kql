@@ -5,4 +5,4 @@ let nameOfState = "NEW YORK";
 StormEvents
 | where StartTime between (startTime .. endTime)
 | where State == nameOfState
-| make-series events=count() default=0 on StartTime in range (startTime, endTime, binSize) by EventType
+| make-series events=count() default=0 on StartTime from startTime to endTime step binSize by EventType
