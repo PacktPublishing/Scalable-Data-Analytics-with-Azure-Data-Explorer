@@ -1,4 +1,4 @@
 StormEvents
 | where StartTime between (datetime("2007-01-01") .. datetime("2007-10-01"))
 | where State == "NEW YORK"
-| make-series events=count() default=0 on StartTime in range (datetime("2007-01-01"), datetime("2007-10-01"), 1d) by EventType
+| make-series events=count() default=0 on StartTime from datetime("2007-01-01") to datetime("2007-10-01") step 1d by EventType
