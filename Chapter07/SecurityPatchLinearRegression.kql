@@ -2,9 +2,8 @@ let startTime = ago(100d);
 let endTime = now();
 let binSize = 1d;
 Update
-| where TimeGenerated  between (startTime .. endTime)
 | where Classification == "Security Updates"
-| make-series updates=count() default=0 on TimeGenerated in range (startTime, endTime, binSize)
+| make-series updates=count() default=0 on TimeGenerated from startTime to endTime step binSize
 | extend (RSquare,Slope,Variance,RVariance,Interception,LineFit)=series_fit_line(updates)
 | mv-expand LineFit to typeof(double), updates to typeof(double), TimeGenerated to typeof(datetime)
 | project TimeGenerated, updates, LineFit

@@ -10,9 +10,7 @@ let coefficient_windowsize=5;
 Perf
 | where TimeGenerated >= startTime
 | where CounterName == "% Processor Time" and Computer == "CH1-UBNTVM"
-| make-series cpu=avg(CounterValue) default=0 on TimeGenerated in range (startTime, endTime, binSize) by Computer
+| make-series cpu=avg(CounterValue) default=0 on TimeGenerated from startTime to endTime step binSize
 | extend movingAverage=series_fir(cpu, repeat(1, coefficient_windowsize))
 | mv-expand cpu to typeof(double), movingAverage to typeof(double), TimeGenerated to typeof(datetime)
-| project TimeGenerated, cpu, movingAverage
 | render timechart 
-
