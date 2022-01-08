@@ -5,7 +5,7 @@ let coefficient_windowsize=10;
 Perf
 | where TimeGenerated >= startTime
 | where CounterName == "% Processor Time" and Computer == "CH1-UBNTVM"
-| make-series cpu=avg(CounterValue) default=0 on TimeGenerated in range (startTime, endTime, binSize) by Computer
+| make-series cpu=avg(CounterValue) default=0 on TimeGenerated from startTime to endTime step binSize by Computer
 | extend movingAverage=series_fir(cpu, repeat(1, coefficient_windowsize))
 | extend add_diff = series_add(cpu, movingAverage)
 | extend sub_diff = series_subtract(cpu, movingAverage)
