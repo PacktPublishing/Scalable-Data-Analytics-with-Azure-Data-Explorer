@@ -7,5 +7,6 @@ StormEvents
 | render piechart 
 
 StormEvents  
-| summarize total_events=count() by EventType
+| summarize total_events=count() by State, EventType
+| sort by total_events desc
 | render stackedareachart 
