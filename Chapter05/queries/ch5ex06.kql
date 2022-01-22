@@ -1,5 +1,6 @@
 Update
 | where TimeGenerated >= ago(90d)
 | where Classification == "Security Updates"
-| summarize count() by bin(startofmonth(TimeGenerated), 1d)
+| summarize count() by bin(TimeGenerated, 30d)
 | render columnchart
+
