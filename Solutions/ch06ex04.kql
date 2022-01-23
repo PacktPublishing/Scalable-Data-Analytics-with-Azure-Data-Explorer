@@ -2,9 +2,8 @@ let startTime = ago(100d);
 let endTime = now();
 let binSize = 7d;
 Update
-| where TimeGenerated  between (startTime .. endTime)
 | where Classification == "Security Updates"
-| make-series security_updates=count() default=0 on TimeGenerated in range (startTime, endTime, binSize) by UpdateState
-| mv-expand TimeGenerated to typeof(datetime), security_updates to typeof(int)
+| make-series security_updates=count() default=0 on TimeGenerated from startTime to endTime step binSize by UpdateState
+| mv-expand TimeGenerated to typeof(datetime), security_updates to typeof(long)
 | project UpdateState, security_updates, TimeGenerated
 | order by UpdateState
