@@ -3,10 +3,8 @@ let endTime = toscalar(demo_make_series1 | summarize max(TimeStamp));
 let binSize = 1h;
 let windowSize = 20;
 demo_make_series1
-| where TimeStamp between (startTime .. endTime)
 | where Country == "United States"
-| make-series requests=count() default=0 on TimeStamp in range (startTime, endTime, binSize) by Country
+| make-series requests=count() default=0 on TimeStamp from startTime to endTime step binSize by Country
 | extend movingAverage = series_moving_avg_fl(requests, windowSize, true)
-| extend (anomalies, score, baseline) = series_decompose_anomalies(movingAverage)
-| project TimeStamp, requests, anomalies
+| extend anomalies = series_decompose_anomalies(movingAverage)
 | render anomalychart with (anomalycolumns=anomalies)
