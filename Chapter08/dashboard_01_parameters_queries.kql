@@ -24,5 +24,4 @@ StormEvents
 StormEvents
 | where State == selected_state
 | where isnotempty( BeginLat) and isnotempty( BeginLon)
-| project EventType, BeginLon, BeginLat, 1
 
