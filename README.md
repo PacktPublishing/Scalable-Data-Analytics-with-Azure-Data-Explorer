@@ -52,7 +52,7 @@ Click on the following link to see the Code in Action:
 
 [Placeholder link](https://bit.ly/3uw1w2U)
 
-### Related products <Other books you may enjoy>
+### Related products 
 * Limitless Analytics with Azure Synapse [[Packt]](https://www.packtpub.com/product/limitless-analytics-with-azure-synapse/9781800205659) [[Amazon]](https://www.amazon.com/dp/1800205651)
 
 * Cloud Scale Analytics with Azure Data Services [[Packt]](https://www.packtpub.com/product/cloud-scale-analytics-with-azure-data-services/9781800562936) [[Amazon]](https://www.amazon.com/dp/1800562934)
