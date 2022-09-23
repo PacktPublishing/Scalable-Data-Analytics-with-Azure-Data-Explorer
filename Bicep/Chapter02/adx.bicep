@@ -28,8 +28,8 @@ param enableDoubleDiskEncryption bool = true
 param enablePurge bool = true
 
 param dbName string
-param dbHotCachePeriod string = '30'
-param dbSoftDeletePeriod string = '365'
+param dbHotCachePeriod string = 'P30D'
+param dbSoftDeletePeriod string = 'P365D'
 
 @allowed([
   'ReadWrite'

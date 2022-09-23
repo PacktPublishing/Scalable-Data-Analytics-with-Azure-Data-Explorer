@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "clusterName": {
-        "value": "adxmyerscough"
+        "value": "myerscoughadx"
       },
       "dbName": {
         "value": "adx-db"
@@ -14,7 +14,7 @@
       "clusterTier": {
         "value": "Basic"
       },
-      "adx_cluster_enableDoubleEncryption": {
+      "enableDoubleDiskEncryption": {
         "value": false
       }
     }
