@@ -60,3 +60,7 @@ Click on the following link to see the Code in Action:
 ## Get to Know the Author
 **Jason Myerscough**
 is a director of Site Reliability Engineering and cloud architect at Nuance Communications. He has been working with Azure daily since 2015. He has migrated his company's flagship product to Azure and designed the environment to be secure and scalable across 16 different Azure regions by applying cloud best practices and governance. He is currently certified as an Azure Administrator (AZ-103) and an Azure DevOps Expert (AZ-400). He holds a first-class bachelor's degree with honors in software engineering and a first class master’s degree in computing.
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781801078542">https://packt.link/free-ebook/9781801078542 </a> </p>
